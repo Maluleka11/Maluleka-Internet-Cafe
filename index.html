@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maluleka's Internet Cafe</title>
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f6f8;
+      color: #333;
+    }
+
+    header {
+      background-color: #0a3d62;
+      color: white;
+      padding: 25px;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #1e5f99;
+      padding: 12px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    section {
+      padding: 30px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      color: #0a3d62;
+    }
+
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      text-align: center;
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+    }
+
+    table th, table td {
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+
+    table th {
+      background-color: #1e5f99;
+      color: white;
+      text-align: left;
+    }
+
+    .contact-box {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    footer {
+      background-color: #0a3d62;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+    }
+
+    /* WhatsApp Button */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25D366;
+      color: white;
+      border-radius: 50px;
+      padding: 12px 18px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      z-index: 1000;
+    }
+
+    .whatsapp-float img {
+      width: 24px;
+      height: 24px;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Maluleka's Internet Cafe</h1>
+  <p>Professional Internet & Office Services | English & Sepedi</p>
+</header>
+
+<nav>
+  <a href="#about">About</a>
+  <a href="#services">Services</a>
+  <a href="#prices">Prices</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<section id="about">
+  <h2>About Us</h2>
+  <p>
+    Maluleka's Internet Cafe provides reliable, affordable, and professional
+    internet and office services. We help with documents, online applications,
+    bookings, and more.
+  </p>
+</section>
+
+<section id="services">
+  <h2>Our Services</h2>
+  <div class="services">
+    <div class="card">Copying & Printing</div>
+    <div class="card">Scanning</div>
+    <div class="card">Typing Services</div>
+    <div class="card">CV Creation</div>
+    <div class="card">Email Creation</div>
+    <div class="card">Certificate Design</div>
+    <div class="card">Poster Design</div>
+    <div class="card">Quotations & Invoices</div>
+    <div class="card">Online Bookings (Home Affairs & More)</div>
+  </div>
+</section>
+
+<section id="prices">
+  <h2>Price List</h2>
+  <table>
+    <tr>
+      <th>Service</th>
+      <th>Price</th>
+    </tr>
+    <tr><td>Copy (Black & White)</td><td>R3</td></tr>
+    <tr><td>Copy (Colour)</td><td>R5</td></tr>
+    <tr><td>Print Out (Black)</td><td>R7</td></tr>
+    <tr><td>Print Out (Colour)</td><td>R15</td></tr>
+    <tr><td>Scan (Per Page)</td><td>R8</td></tr>
+    <tr><td>CV + Print + PDF</td><td>R35</td></tr>
+    <tr><td>Email Creation</td><td>R30</td></tr>
+    <tr><td>Typing Services</td><td>Depends on work</td></tr>
+  </table>
+</section>
+
+<section id="contact">
+  <h2>Contact Us</h2>
+  <div class="contact-box">
+    <p>
+      📍 Location: Your Area Name<br>
+      📞 Phone / WhatsApp: 0XXXXXXXXX<br>
+      📧 Email: your@email.com<br>
+      🕘 Hours: Monday – Saturday, 08:00 – 18:00
+    </p>
+
+    <h3>Find Us</h3>
+    <!-- Replace the src link below with your Google Maps embed link -->
+    <iframe
+      src="https://www.google.com/maps"
+      width="100%"
+      height="300"
+      style="border:0; border-radius:8px;"
+      allowfullscreen=""
+      loading="lazy">
+    </iframe>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 Maluleka's Internet Cafe. All Rights Reserved.</p>
+</footer>
+
+<!-- WhatsApp Auto Message Button -->
+<a href="https://wa.me/278XXXXXXXX?text=Hello%20Maluleka%27s%20Internet%20Cafe,%20I%20need%20assistance%20with%20your%20services."
+   class="whatsapp-float" target="_blank">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+  WhatsApp Us
+</a>
+
+</body>
+</html>
