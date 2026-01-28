@@ -1,119 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Maluleka's Internet Cafe</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maluleka's Internet Cafe</title>
 
-  <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f6f8;
-      color: #333;
-    }
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f4f6f8;
+  color: #333;
+}
 
-    header {
-      background-color: #0a3d62;
-      color: white;
-      padding: 25px;
-      text-align: center;
-    }
+header {
+  background: #0a3d62;
+  color: white;
+  padding: 25px;
+  text-align: center;
+}
 
-    nav {
-      background-color: #1e5f99;
-      padding: 12px;
-      text-align: center;
-    }
+nav {
+  background: #1e6091;
+  padding: 10px;
+  text-align: center;
+}
 
-    nav a {
-      color: white;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
-    }
+nav a {
+  color: white;
+  margin: 0 12px;
+  text-decoration: none;
+  font-weight: bold;
+}
 
-    section {
-      padding: 30px 20px;
-      max-width: 1000px;
-      margin: auto;
-    }
+section {
+  padding: 20px;
+  margin: 10px;
+  background: white;
+  border-radius: 8px;
+}
 
-    h2 {
-      color: #0a3d62;
-    }
+h2 {
+  color: #0a3d62;
+}
 
-    .services {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 15px;
-    }
+ul {
+  line-height: 1.8;
+}
 
-    .card {
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      text-align: center;
-      font-weight: bold;
-    }
+.price {
+  font-weight: bold;
+}
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: white;
-    }
+footer {
+  background: #0a3d62;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin-top: 20px;
+}
 
-    table th, table td {
-      border: 1px solid #ccc;
-      padding: 10px;
-    }
-
-    table th {
-      background-color: #1e5f99;
-      color: white;
-      text-align: left;
-    }
-
-    .contact-box {
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-    }
-
-    footer {
-      background-color: #0a3d62;
-      color: white;
-      text-align: center;
-      padding: 15px;
-      margin-top: 30px;
-    }
-
-    /* WhatsApp Button */
-    .whatsapp-float {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #25D366;
-      color: white;
-      border-radius: 50px;
-      padding: 12px 18px;
-      text-decoration: none;
-      font-size: 16px;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      z-index: 1000;
-    }
-
-    .whatsapp-float img {
-      width: 24px;
-      height: 24px;
-      margin-right: 10px;
-    }
-  </style>
+/* WhatsApp Button */
+.whatsapp {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #25D366;
+  color: white;
+  padding: 14px 20px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+}
+</style>
 </head>
 
 <body>
@@ -133,7 +92,7 @@
 <section id="about">
   <h2>About Us</h2>
   <p>
-    Maluleka's Internet Cafe provides reliable, affordable, and professional
+    Maluleka's Internet Cafe provides reliable, affordable and professional
     internet and office services. We help with documents, online applications,
     bookings, and more.
   </p>
@@ -141,69 +100,55 @@
 
 <section id="services">
   <h2>Our Services</h2>
-  <div class="services">
-    <div class="card">Copying & Printing</div>
-    <div class="card">Scanning</div>
-    <div class="card">Typing Services</div>
-    <div class="card">CV Creation</div>
-    <div class="card">Email Creation</div>
-    <div class="card">Certificate Design</div>
-    <div class="card">Poster Design</div>
-    <div class="card">Quotations & Invoices</div>
-    <div class="card">Online Bookings (Home Affairs & More)</div>
-  </div>
+  <ul>
+    <li>Copy, Printing & Scanning</li>
+    <li>Typing & CV Creation</li>
+    <li>Email Creation</li>
+    <li>Certificate & Poster Design</li>
+    <li>Quotations & Invoices</li>
+    <li>Online Booking (Home Affairs & more)</li>
+  </ul>
 </section>
 
 <section id="prices">
-  <h2>Price List</h2>
-  <table>
-    <tr>
-      <th>Service</th>
-      <th>Price</th>
-    </tr>
-    <tr><td>Copy (Black & White)</td><td>R3</td></tr>
-    <tr><td>Copy (Colour)</td><td>R5</td></tr>
-    <tr><td>Print Out (Black)</td><td>R7</td></tr>
-    <tr><td>Print Out (Colour)</td><td>R15</td></tr>
-    <tr><td>Scan (Per Page)</td><td>R8</td></tr>
-    <tr><td>CV + Print + PDF</td><td>R35</td></tr>
-    <tr><td>Email Creation</td><td>R30</td></tr>
-    <tr><td>Typing Services</td><td>Depends on work</td></tr>
-  </table>
+  <h2>Prices</h2>
+  <ul>
+    <li>Copy (Black & White): <span class="price">R3</span></li>
+    <li>Copy (Colour): <span class="price">R5</span></li>
+    <li>Print Out (Black): <span class="price">R7</span></li>
+    <li>Print Out (Colour): <span class="price">R15</span></li>
+    <li>Scan per Page: <span class="price">R8</span></li>
+    <li>CV + Print + PDF: <span class="price">R35</span></li>
+    <li>Email Creation: <span class="price">R30</span></li>
+  </ul>
 </section>
 
 <section id="contact">
   <h2>Contact Us</h2>
-  <div class="contact-box">
-    <p>
-      📍 Location: Your Area Name<br>
-      📞 Phone / WhatsApp: 0XXXXXXXXX<br>
-      📧 Email: your@email.com<br>
-      🕘 Hours: Monday – Saturday, 08:00 – 18:00
-    </p>
+  <p>📞 Phone / WhatsApp: <strong>073 217 6610</strong></p>
+  <p>
+    📍 Mapela, Armoede, House No 129<br>
+    Next to Jan Malebana Primary School
+  </p>
 
-    <h3>Find Us</h3>
-    <!-- Replace the src link below with your Google Maps embed link -->
-    <iframe
-      src="https://www.google.com/maps"
-      width="100%"
-      height="300"
-      style="border:0; border-radius:8px;"
-      allowfullscreen=""
-      loading="lazy">
-    </iframe>
-  </div>
+  <h3>Find Us on the Map</h3>
+  <iframe
+    src="https://www.google.com/maps?q=Jan+Malebana+Primary+School+Mapela&output=embed"
+    width="100%"
+    height="300"
+    style="border:0; border-radius:8px;"
+    loading="lazy">
+  </iframe>
 </section>
 
 <footer>
-  <p>&copy; 2026 Maluleka's Internet Cafe. All Rights Reserved.</p>
+  <p>&copy; 2026 Maluleka's Internet Cafe. All rights reserved.</p>
 </footer>
 
-<!-- WhatsApp Auto Message Button -->
-<a href="https://wa.me/278XXXXXXXX?text=Hello%20Maluleka%27s%20Internet%20Cafe,%20I%20need%20assistance%20with%20your%20services."
-   class="whatsapp-float" target="_blank">
-  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-  WhatsApp Us
+<a class="whatsapp"
+   href="https://wa.me/27732176610?text=Hello%20I%20found%20Maluleka's%20Internet%20Cafe%20website.%20I%20need%20help%20with%20your%20services."
+   target="_blank">
+   💬 WhatsApp Us
 </a>
 
 </body>
