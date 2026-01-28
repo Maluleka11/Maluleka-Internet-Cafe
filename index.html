@@ -7,49 +7,75 @@
 
 <style>
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
+  font-family: Arial, sans-serif;
   background: #f4f6f8;
   color: #333;
 }
 
 header {
-  background: #0a3d62;
+  background: linear-gradient(135deg, #0a3d62, #1e6091);
   color: white;
-  padding: 25px;
+  padding: 30px 20px;
   text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+header p {
+  margin-top: 8px;
+  font-size: 16px;
 }
 
 nav {
-  background: #1e6091;
-  padding: 10px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  background: #ffffff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
 nav a {
-  color: white;
-  margin: 0 12px;
+  padding: 12px 16px;
   text-decoration: none;
+  color: #0a3d62;
   font-weight: bold;
 }
 
+nav a:hover {
+  background: #f0f0f0;
+}
+
 section {
+  max-width: 1000px;
+  margin: 20px auto;
   padding: 20px;
-  margin: 10px;
   background: white;
-  border-radius: 8px;
+  border-radius: 10px;
 }
 
 h2 {
   color: #0a3d62;
+  margin-bottom: 10px;
 }
 
-ul {
-  line-height: 1.8;
+.services {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
 }
 
-.price {
-  font-weight: bold;
+.service-box {
+  background: #f9fbfd;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 5px solid #1e6091;
+}
+
+.price-list li {
+  margin-bottom: 6px;
 }
 
 footer {
@@ -57,7 +83,7 @@ footer {
   color: white;
   text-align: center;
   padding: 15px;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 /* WhatsApp Button */
@@ -68,9 +94,10 @@ footer {
   background: #25D366;
   color: white;
   padding: 14px 20px;
-  border-radius: 30px;
+  border-radius: 40px;
   text-decoration: none;
   font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 </style>
 </head>
@@ -79,7 +106,7 @@ footer {
 
 <header>
   <h1>Maluleka's Internet Cafe</h1>
-  <p>Professional Internet & Office Services | English & Sepedi</p>
+  <p>Internet • Printing • CVs • Online Services</p>
 </header>
 
 <nav>
@@ -92,57 +119,59 @@ footer {
 <section id="about">
   <h2>About Us</h2>
   <p>
-    Maluleka's Internet Cafe provides reliable, affordable and professional
-    internet and office services. We help with documents, online applications,
-    bookings, and more.
+    Maluleka's Internet Cafe provides fast, reliable and affordable
+    internet and office services in Mapela.
+    We assist with documents, CVs, applications and online bookings.
   </p>
 </section>
 
 <section id="services">
   <h2>Our Services</h2>
-  <ul>
-    <li>Copy, Printing & Scanning</li>
-    <li>Typing & CV Creation</li>
-    <li>Email Creation</li>
-    <li>Certificate & Poster Design</li>
-    <li>Quotations & Invoices</li>
-    <li>Online Booking (Home Affairs & more)</li>
-  </ul>
+  <div class="services">
+    <div class="service-box">Copying & Printing</div>
+    <div class="service-box">Scanning</div>
+    <div class="service-box">Typing & CV Creation</div>
+    <div class="service-box">Email Creation</div>
+    <div class="service-box">Certificates & Posters</div>
+    <div class="service-box">Quotations & Invoices</div>
+    <div class="service-box">Home Affairs Online Booking</div>
+  </div>
 </section>
 
 <section id="prices">
   <h2>Prices</h2>
-  <ul>
-    <li>Copy (Black & White): <span class="price">R3</span></li>
-    <li>Copy (Colour): <span class="price">R5</span></li>
-    <li>Print Out (Black): <span class="price">R7</span></li>
-    <li>Print Out (Colour): <span class="price">R15</span></li>
-    <li>Scan per Page: <span class="price">R8</span></li>
-    <li>CV + Print + PDF: <span class="price">R35</span></li>
-    <li>Email Creation: <span class="price">R30</span></li>
+  <ul class="price-list">
+    <li>Copy (Black & White): <strong>R3</strong></li>
+    <li>Copy (Colour): <strong>R5</strong></li>
+    <li>Print Out (Black): <strong>R7</strong></li>
+    <li>Print Out (Colour): <strong>R15</strong></li>
+    <li>Scan per Page: <strong>R8</strong></li>
+    <li>CV + Print + PDF: <strong>R35</strong></li>
+    <li>Email Creation: <strong>R30</strong></li>
   </ul>
 </section>
 
 <section id="contact">
   <h2>Contact Us</h2>
-  <p>📞 Phone / WhatsApp: <strong>073 217 6610</strong></p>
+  <p><strong>Phone / WhatsApp:</strong> 073 217 6610</p>
   <p>
-    📍 Mapela, Armoede, House No 129<br>
+    <strong>Address:</strong><br>
+    House No 129, Mapela, Armoede<br>
     Next to Jan Malebana Primary School
   </p>
 
-  <h3>Find Us on the Map</h3>
+  <h3>Find Us</h3>
   <iframe
     src="https://www.google.com/maps?q=Jan+Malebana+Primary+School+Mapela&output=embed"
     width="100%"
     height="300"
-    style="border:0; border-radius:8px;"
+    style="border:0; border-radius:10px;"
     loading="lazy">
   </iframe>
 </section>
 
 <footer>
-  <p>&copy; 2026 Maluleka's Internet Cafe. All rights reserved.</p>
+  <p>&copy; 2026 Maluleka's Internet Cafe</p>
 </footer>
 
 <a class="whatsapp"
