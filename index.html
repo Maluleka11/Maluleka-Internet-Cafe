@@ -6,16 +6,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:#f1f3f6}
-header{background:linear-gradient(135deg,#000,#333);color:#fff;padding:50px;text-align:center}
-nav{background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.1);text-align:center}
-nav a{display:inline-block;padding:15px;text-decoration:none;font-weight:bold;color:#333}
-section{background:#fff;margin:20px;padding:20px;border-radius:10px;box-shadow:0 5px 20px rgba(0,0,0,.08)}
-button{background:#0a7cff;color:#fff;border:none;padding:10px 16px;border-radius:6px;font-size:14px;cursor:pointer}
-input,select{width:100%;padding:12px;margin:6px 0}
-footer{background:#111;color:#fff;text-align:center;padding:20px}
+body{margin:0;font-family:Arial,sans-serif;background:#f1f3f6}
+header{background:#000;color:#fff;padding:40px;text-align:center}
+nav{background:#fff;text-align:center;padding:10px}
+nav a{margin:10px;font-weight:bold;color:#000;text-decoration:none}
+section{background:#fff;margin:15px;padding:15px;border-radius:8px}
+button{background:#0a7cff;color:#fff;border:none;padding:12px;width:100%;border-radius:6px}
+input,select{width:100%;padding:10px;margin:6px 0}
+footer{background:#111;color:#fff;text-align:center;padding:15px}
 .hidden{display:none}
-li{margin-bottom:10px}
+li{margin-bottom:8px}
+.admin-btn{width:auto;margin-left:10px;padding:6px}
 </style>
 </head>
 
@@ -23,35 +24,38 @@ li{margin-bottom:10px}
 
 <header>
   <h1>Maluleka’s Internet Cafe</h1>
-  <p>Professional Digital Services</p>
+  <p>Copy • Print • Scan • CV • Online Services</p>
 </header>
 
 <nav>
   <a href="#services">Services</a>
-  <a href="#booking">Appointment</a>
+  <a href="#booking">Book</a>
 </nav>
 
+<!-- SERVICES WITH PRICES -->
 <section id="services">
-  <h2>Our Services & Prices</h2>
+  <h2>Services & Prices</h2>
   <ul>
-    <li>Copy – <strong>R3</strong></li>
-    <li>Copy Colour – <strong>R5</strong></li>
-    <li>Print Out (Black & White) – <strong>R7</strong></li>
-    <li>Print Out (Colour) – <strong>R15</strong></li>
-    <li>Scan (Per Page) – <strong>R8</strong></li>
-    <li>CV + Print Out + PDF – <strong>R35</strong></li>
-    <li>Email Creation – <strong>R30</strong></li>
-    <li>Typing (Per Page) – <strong>R20</strong></li>
-    <li>Certificate Design – <strong>Negotiable</strong></li>
-    <li>Poster Design – <strong>Negotiable</strong></li>
-    <li>Invoices – <strong>Negotiable</strong></li>
-    <li>Booking Online (Home Affairs & More) – <strong>Negotiable</strong></li>
-    <li>College Application – <strong>Negotiable</strong></li>
+    <li>Copy – R3</li>
+    <li>Copy Colour – R5</li>
+    <li>Print Black – R7</li>
+    <li>Print Colour – R15</li>
+    <li>Scan per page – R8</li>
+    <li>CV + Print + PDF – R35</li>
+    <li>Email Creation – R30</li>
+    <li>Typing per page – R20</li>
+    <li>Certificate Design – Negotiable</li>
+    <li>Poster Design – Negotiable</li>
+    <li>Invoices – Negotiable</li>
+    <li>Home Affairs Booking – Negotiable</li>
+    <li>College Application – Negotiable</li>
   </ul>
 </section>
 
+<!-- BOOKING WITH WHATSAPP -->
 <section id="booking">
-  <h2>Book Appointment</h2>
+  <h2>Book via WhatsApp</h2>
+
   <form id="bookingForm">
     <input id="name" placeholder="Full Name" required>
     <input id="phone" placeholder="Phone Number" required>
@@ -60,8 +64,8 @@ li{margin-bottom:10px}
       <option value="">Select Service</option>
       <option value="Copy">Copy</option>
       <option value="Copy Colour">Copy Colour</option>
-      <option value="Print Black">Print Out Black</option>
-      <option value="Print Colour">Print Out Colour</option>
+      <option value="Print Black">Print Black</option>
+      <option value="Print Colour">Print Colour</option>
       <option value="Scan">Scan</option>
       <option value="CV Package">CV + Print + PDF</option>
       <option value="Email Creation">Email Creation</option>
@@ -74,24 +78,25 @@ li{margin-bottom:10px}
     </select>
 
     <input id="date" type="date" required>
-    <button type="submit">Book via WhatsApp</button>
+
+    <!-- WHATSAPP BUTTON -->
+    <button type="submit">📲 Book on WhatsApp</button>
   </form>
 
-  <p style="margin-top:10px;color:#555;">💡 Payment is done at the shop after service.</p>
-  <p id="msg"></p>
+  <p>💡 Payment is done at the shop.</p>
 </section>
 
-<!-- ADMIN (HIDDEN) -->
+<!-- ADMIN (SEPARATE & HIDDEN) -->
 <section id="admin" class="hidden">
   <h2>Admin Login</h2>
 
   <div id="loginBox">
-    <input type="password" id="adminPass" placeholder="Enter admin password">
+    <input type="password" id="adminPass" placeholder="Admin Password">
     <button onclick="login()">Login</button>
   </div>
 
   <div id="dashboard" class="hidden">
-    <h3>Daily Sales Report</h3>
+    <h3>Bookings</h3>
     <ul id="report"></ul>
   </div>
 </section>
@@ -103,30 +108,22 @@ li{margin-bottom:10px}
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  updateDoc,
-  doc,
-  serverTimestamp
+  getFirestore, collection, addDoc, getDocs,
+  updateDoc, doc, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-/* 🔥 ADD YOUR FIREBASE DETAILS */
+/* 🔥 FIREBASE DETAILS */
 const firebaseConfig = {
   apiKey: "YOUR_API_KEY",
   authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT.appspot.com",
-  messagingSenderId: "XXXX",
-  appId: "XXXX"
+  projectId: "YOUR_PROJECT_ID"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-/* SHOW ADMIN ONLY IF #admin */
-if (window.location.hash === "#admin") {
+/* SHOW ADMIN ONLY WITH #admin */
+if (location.hash === "#admin") {
   document.getElementById("admin").classList.remove("hidden");
 }
 
@@ -165,7 +162,7 @@ bookingForm.addEventListener("submit", async e => {
 
   const priceText = booking.price === 0 ? "Negotiable" : "R" + booking.price;
 
-  const msgText =
+  const text =
 `Booking Request
 Name: ${booking.name}
 Phone: ${booking.phone}
@@ -173,8 +170,7 @@ Service: ${booking.service}
 Date: ${booking.date}
 Price: ${priceText}`;
 
-  window.open("https://wa.me/27732176610?text=" + encodeURIComponent(msgText));
-  msg.textContent = "✅ Booking sent via WhatsApp";
+  window.open("https://wa.me/27732176610?text=" + encodeURIComponent(text));
   e.target.reset();
 });
 
@@ -188,32 +184,30 @@ window.login = async () => {
   loginBox.classList.add("hidden");
   dashboard.classList.remove("hidden");
 
-  const snapshot = await getDocs(collection(db, "appointments"));
+  const snap = await getDocs(collection(db, "appointments"));
   report.innerHTML = "";
   let total = 0;
 
-  snapshot.forEach(docc => {
-    const d = docc.data();
-    if (d.paid) total += d.price || 0;
+  snap.forEach(r => {
+    const d = r.data();
+    if (d.paid) total += d.price;
 
     const li = document.createElement("li");
     li.innerHTML = `
       ${d.name} – ${d.service} – R${d.price}
       <strong>${d.paid ? " ✅ Paid" : " ❌ Not Paid"}</strong>
-      <button>Mark as ${d.paid ? "Not Paid" : "Paid"}</button>
+      <button class="admin-btn">Toggle</button>
     `;
 
     li.querySelector("button").onclick = async () => {
-      await updateDoc(doc(db, "appointments", docc.id), { paid: !d.paid });
+      await updateDoc(doc(db,"appointments",r.id),{paid:!d.paid});
       login();
     };
 
     report.appendChild(li);
   });
 
-  const totalLi = document.createElement("li");
-  totalLi.innerHTML = `<strong>Total Paid Sales: R${total}</strong>`;
-  report.appendChild(totalLi);
+  report.innerHTML += `<li><strong>Total Paid: R${total}</strong></li>`;
 };
 </script>
 
