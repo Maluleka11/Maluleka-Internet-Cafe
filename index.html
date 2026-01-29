@@ -121,6 +121,19 @@ footer{background:#111;color:#fff;text-align:center;padding:15px}
 <a id="whatsappFloat" href="https://wa.me/27732176610" target="_blank">💬</a>
 
 <script>
+const bookingForm = document.getElementById("bookingForm");
+const service = document.getElementById("service");
+const price = document.getElementById("price");
+const nameInput = document.getElementById("name");
+const phone = document.getElementById("phone");
+const date = document.getElementById("date");
+const time = document.getElementById("time");
+const adminPass = document.getElementById("adminPass");
+const loginBox = document.getElementById("loginBox");
+const dashboard = document.getElementById("dashboard");
+const report = document.getElementById("report");
+const total = document.getElementById("total");
+
 const prices = {
   "Copy": 3,
   "Copy Colour": 5,
@@ -138,13 +151,13 @@ service.addEventListener("change", () => {
   price.innerText = p === 0 ? "Negotiable" : "R" + p;
 });
 
-bookingForm.addEventListener("submit", e => {
+bookingForm.addEventListener("submit", function(e){
   e.preventDefault();
 
   const p = prices[service.value] || 0;
 
   const booking = {
-    name: name.value,
+    name: nameInput.value,
     phone: phone.value,
     service: service.value,
     date: date.value,
@@ -165,7 +178,9 @@ Date: ${booking.date}
 Time: ${booking.time}
 Price: ${p === 0 ? "Negotiable" : "R"+p}`;
 
-  window.open("https://wa.me/27732176610?text="+encodeURIComponent(text),"_blank");
+  const whatsappURL = "https://wa.me/27732176610?text=" + encodeURIComponent(text);
+
+  window.open(whatsappURL, "_blank");
 
   bookingForm.reset();
   price.innerText = "R0";
@@ -185,10 +200,10 @@ function login(){
 function loadBookings(){
   const data = JSON.parse(localStorage.getItem("bookings") || "[]");
   report.innerHTML = "";
-  let total = 0;
+  let totalAmount = 0;
 
   data.forEach(b => {
-    total += b.price;
+    totalAmount += b.price;
     report.innerHTML += `
       <div class="adminBox">
         <strong>${b.name}</strong><br>
@@ -198,7 +213,7 @@ function loadBookings(){
     `;
   });
 
-  total.innerText = "R" + total;
+  total.innerText = "R" + totalAmount;
 }
 
 function clearData(){
