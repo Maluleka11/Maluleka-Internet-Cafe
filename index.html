@@ -11,12 +11,30 @@ header{background:#000;color:#fff;padding:40px;text-align:center}
 nav{background:#fff;text-align:center;padding:10px}
 nav a{margin:10px;font-weight:bold;color:#000;text-decoration:none}
 section{background:#fff;margin:15px;padding:15px;border-radius:8px}
-button{background:#0a7cff;color:#fff;border:none;padding:12px;width:100%;border-radius:6px}
+button{background:#0a7cff;color:#fff;border:none;padding:12px;width:100%;border-radius:6px;font-size:16px}
 input,select{width:100%;padding:10px;margin:6px 0}
 footer{background:#111;color:#fff;text-align:center;padding:15px}
 .hidden{display:none}
 li{margin-bottom:8px}
-.admin-btn{width:auto;margin-left:10px;padding:6px}
+
+/* FLOATING WHATSAPP */
+#whatsappFloat{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  width:60px;
+  height:60px;
+  background:#25D366;
+  color:#fff;
+  border-radius:50%;
+  font-size:30px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  box-shadow:0 4px 10px rgba(0,0,0,.3);
+  z-index:999;
+}
 </style>
 </head>
 
@@ -32,7 +50,6 @@ li{margin-bottom:8px}
   <a href="#booking">Book</a>
 </nav>
 
-<!-- SERVICES WITH PRICES -->
 <section id="services">
   <h2>Services & Prices</h2>
   <ul>
@@ -52,7 +69,6 @@ li{margin-bottom:8px}
   </ul>
 </section>
 
-<!-- BOOKING WITH WHATSAPP -->
 <section id="booking">
   <h2>Book via WhatsApp</h2>
 
@@ -78,15 +94,13 @@ li{margin-bottom:8px}
     </select>
 
     <input id="date" type="date" required>
-
-    <!-- WHATSAPP BUTTON -->
     <button type="submit">📲 Book on WhatsApp</button>
   </form>
 
   <p>💡 Payment is done at the shop.</p>
 </section>
 
-<!-- ADMIN (SEPARATE & HIDDEN) -->
+<!-- ADMIN (HIDDEN) -->
 <section id="admin" class="hidden">
   <h2>Admin Login</h2>
 
@@ -105,6 +119,9 @@ li{margin-bottom:8px}
   <p>© 2026 Maluleka’s Internet Cafe</p>
 </footer>
 
+<!-- FLOATING WHATSAPP BUTTON -->
+<a id="whatsappFloat" href="https://wa.me/27732176610">💬</a>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {
@@ -112,7 +129,7 @@ import {
   updateDoc, doc, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-/* 🔥 FIREBASE DETAILS */
+/* FIREBASE CONFIG */
 const firebaseConfig = {
   apiKey: "YOUR_API_KEY",
   authDomain: "YOUR_PROJECT.firebaseapp.com",
@@ -144,7 +161,7 @@ const prices = {
   "College Application": 0
 };
 
-/* BOOKING */
+/* BOOKING → ANDROID WHATSAPP ONLY */
 bookingForm.addEventListener("submit", async e => {
   e.preventDefault();
 
@@ -170,8 +187,12 @@ Service: ${booking.service}
 Date: ${booking.date}
 Price: ${priceText}`;
 
-  window.open("https://wa.me/27732176610?text=" + encodeURIComponent(text));
-  e.target.reset();
+  if (/Android/i.test(navigator.userAgent)) {
+    window.location.href =
+      "https://wa.me/27732176610?text=" + encodeURIComponent(text);
+  } else {
+    alert("Please use an Android phone to open WhatsApp");
+  }
 });
 
 /* ADMIN LOGIN */
@@ -196,7 +217,7 @@ window.login = async () => {
     li.innerHTML = `
       ${d.name} – ${d.service} – R${d.price}
       <strong>${d.paid ? " ✅ Paid" : " ❌ Not Paid"}</strong>
-      <button class="admin-btn">Toggle</button>
+      <button>Toggle</button>
     `;
 
     li.querySelector("button").onclick = async () => {
