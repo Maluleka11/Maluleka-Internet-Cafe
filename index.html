@@ -11,11 +11,11 @@ header{background:#000;color:#fff;padding:40px;text-align:center}
 nav{background:#fff;text-align:center;padding:10px}
 nav a{margin:10px;font-weight:bold;color:#000;text-decoration:none}
 section{background:#fff;margin:15px;padding:15px;border-radius:8px}
-button{background:#0a7cff;color:#fff;border:none;padding:12px;width:100%;border-radius:6px;font-size:16px}
+button{background:#0a7cff;color:#fff;border:none;padding:12px;width:100%;border-radius:6px;font-size:16px;margin-top:8px}
 input,select{width:100%;padding:10px;margin:6px 0}
 footer{background:#111;color:#fff;text-align:center;padding:15px}
 .hidden{display:none}
-li{margin-bottom:8px}
+.priceBox{background:#e6f2ff;padding:10px;border-radius:6px;font-weight:bold;margin-top:5px}
 
 /* FLOATING WHATSAPP */
 #whatsappFloat{
@@ -35,6 +35,8 @@ li{margin-bottom:8px}
   box-shadow:0 4px 10px rgba(0,0,0,.3);
   z-index:999;
 }
+
+.adminBox{background:#f9f9f9;padding:10px;border-radius:6px;margin:6px 0}
 </style>
 </head>
 
@@ -48,6 +50,7 @@ li{margin-bottom:8px}
 <nav>
   <a href="#services">Services</a>
   <a href="#booking">Book</a>
+  <a href="#admin">Admin</a>
 </nav>
 
 <section id="services">
@@ -57,15 +60,11 @@ li{margin-bottom:8px}
     <li>Copy Colour – R5</li>
     <li>Print Black – R7</li>
     <li>Print Colour – R15</li>
-    <li>Scan per page – R8</li>
+    <li>Scan – R8</li>
     <li>CV + Print + PDF – R35</li>
     <li>Email Creation – R30</li>
-    <li>Typing per page – R20</li>
-    <li>Certificate Design – Negotiable</li>
-    <li>Poster Design – Negotiable</li>
-    <li>Invoices – Negotiable</li>
-    <li>Home Affairs Booking – Negotiable</li>
-    <li>College Application – Negotiable</li>
+    <li>Typing – R20</li>
+    <li>Other – Negotiable</li>
   </ul>
 </section>
 
@@ -86,32 +85,32 @@ li{margin-bottom:8px}
       <option value="CV Package">CV + Print + PDF</option>
       <option value="Email Creation">Email Creation</option>
       <option value="Typing">Typing</option>
-      <option value="Certificate Design">Certificate Design</option>
-      <option value="Poster Design">Poster Design</option>
-      <option value="Invoices">Invoices</option>
-      <option value="Home Affairs Booking">Home Affairs Booking</option>
-      <option value="College Application">College Application</option>
+      <option value="Other">Other (Negotiable)</option>
     </select>
 
-    <input id="date" type="date" required>
+    <div class="priceBox">Price: <span id="price">R0</span></div>
+
+    <input type="date" id="date" required>
+    <input type="time" id="time" required>
+
     <button type="submit">📲 Book on WhatsApp</button>
   </form>
-
-  <p>💡 Payment is done at the shop.</p>
 </section>
 
-<!-- ADMIN (HIDDEN) -->
-<section id="admin" class="hidden">
-  <h2>Admin Login</h2>
+<!-- ADMIN -->
+<section id="admin">
+  <h2>Admin Dashboard</h2>
 
   <div id="loginBox">
-    <input type="password" id="adminPass" placeholder="Admin Password">
+    <input type="password" id="adminPass" placeholder="Enter Admin Password">
     <button onclick="login()">Login</button>
   </div>
 
   <div id="dashboard" class="hidden">
     <h3>Bookings</h3>
-    <ul id="report"></ul>
+    <div id="report"></div>
+    <h3>Total Income: <span id="total">R0</span></h3>
+    <button onclick="clearData()">Clear All Bookings</button>
   </div>
 </section>
 
@@ -119,32 +118,9 @@ li{margin-bottom:8px}
   <p>© 2026 Maluleka’s Internet Cafe</p>
 </footer>
 
-<!-- FLOATING WHATSAPP BUTTON -->
-<a id="whatsappFloat" href="https://wa.me/27732176610">💬</a>
+<a id="whatsappFloat" href="https://wa.me/27732176610" target="_blank">💬</a>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {
-  getFirestore, collection, addDoc, getDocs,
-  updateDoc, doc, serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-/* FIREBASE CONFIG */
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-/* SHOW ADMIN ONLY WITH #admin */
-if (location.hash === "#admin") {
-  document.getElementById("admin").classList.remove("hidden");
-}
-
-/* PRICES */
+<script>
 const prices = {
   "Copy": 3,
   "Copy Colour": 5,
@@ -154,30 +130,31 @@ const prices = {
   "CV Package": 35,
   "Email Creation": 30,
   "Typing": 20,
-  "Certificate Design": 0,
-  "Poster Design": 0,
-  "Invoices": 0,
-  "Home Affairs Booking": 0,
-  "College Application": 0
+  "Other": 0
 };
 
-/* BOOKING → ANDROID WHATSAPP ONLY */
-bookingForm.addEventListener("submit", async e => {
+service.addEventListener("change", () => {
+  const p = prices[service.value] || 0;
+  price.innerText = p === 0 ? "Negotiable" : "R" + p;
+});
+
+bookingForm.addEventListener("submit", e => {
   e.preventDefault();
+
+  const p = prices[service.value] || 0;
 
   const booking = {
     name: name.value,
     phone: phone.value,
     service: service.value,
     date: date.value,
-    price: prices[service.value] || 0,
-    paid: false,
-    created: serverTimestamp()
+    time: time.value,
+    price: p
   };
 
-  await addDoc(collection(db, "appointments"), booking);
-
-  const priceText = booking.price === 0 ? "Negotiable" : "R" + booking.price;
+  const data = JSON.parse(localStorage.getItem("bookings") || "[]");
+  data.push(booking);
+  localStorage.setItem("bookings", JSON.stringify(data));
 
   const text =
 `Booking Request
@@ -185,51 +162,51 @@ Name: ${booking.name}
 Phone: ${booking.phone}
 Service: ${booking.service}
 Date: ${booking.date}
-Price: ${priceText}`;
+Time: ${booking.time}
+Price: ${p === 0 ? "Negotiable" : "R"+p}`;
 
-  if (/Android/i.test(navigator.userAgent)) {
-    window.location.href =
-      "https://wa.me/27732176610?text=" + encodeURIComponent(text);
-  } else {
-    alert("Please use an Android phone to open WhatsApp");
-  }
+  window.open("https://wa.me/27732176610?text="+encodeURIComponent(text),"_blank");
+
+  bookingForm.reset();
+  price.innerText = "R0";
 });
 
-/* ADMIN LOGIN */
-window.login = async () => {
-  if (adminPass.value !== "maluleka123") {
+function login(){
+  if(adminPass.value !== "maluleka123"){
     alert("Wrong password");
     return;
   }
 
   loginBox.classList.add("hidden");
   dashboard.classList.remove("hidden");
+  loadBookings();
+}
 
-  const snap = await getDocs(collection(db, "appointments"));
+function loadBookings(){
+  const data = JSON.parse(localStorage.getItem("bookings") || "[]");
   report.innerHTML = "";
   let total = 0;
 
-  snap.forEach(r => {
-    const d = r.data();
-    if (d.paid) total += d.price;
-
-    const li = document.createElement("li");
-    li.innerHTML = `
-      ${d.name} – ${d.service} – R${d.price}
-      <strong>${d.paid ? " ✅ Paid" : " ❌ Not Paid"}</strong>
-      <button>Toggle</button>
+  data.forEach(b => {
+    total += b.price;
+    report.innerHTML += `
+      <div class="adminBox">
+        <strong>${b.name}</strong><br>
+        ${b.service} – R${b.price}<br>
+        ${b.date} @ ${b.time}
+      </div>
     `;
-
-    li.querySelector("button").onclick = async () => {
-      await updateDoc(doc(db,"appointments",r.id),{paid:!d.paid});
-      login();
-    };
-
-    report.appendChild(li);
   });
 
-  report.innerHTML += `<li><strong>Total Paid: R${total}</strong></li>`;
-};
+  total.innerText = "R" + total;
+}
+
+function clearData(){
+  if(confirm("Delete all bookings?")){
+    localStorage.removeItem("bookings");
+    loadBookings();
+  }
+}
 </script>
 
 </body>
