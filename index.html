@@ -11,10 +11,11 @@ header{background:linear-gradient(135deg,#000,#333);color:#fff;padding:50px;text
 nav{background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.1);text-align:center}
 nav a{display:inline-block;padding:15px;text-decoration:none;font-weight:bold;color:#333}
 section{background:#fff;margin:20px;padding:20px;border-radius:10px;box-shadow:0 5px 20px rgba(0,0,0,.08)}
-button{background:#0a7cff;color:#fff;border:none;padding:12px 20px;border-radius:6px;font-size:16px}
+button{background:#0a7cff;color:#fff;border:none;padding:10px 16px;border-radius:6px;font-size:14px;cursor:pointer}
 input,select{width:100%;padding:12px;margin:6px 0}
 footer{background:#111;color:#fff;text-align:center;padding:20px}
 .hidden{display:none}
+li{margin-bottom:10px}
 </style>
 </head>
 
@@ -28,17 +29,24 @@ footer{background:#111;color:#fff;text-align:center;padding:20px}
 <nav>
   <a href="#services">Services</a>
   <a href="#booking">Appointment</a>
-  <a href="#payment">Payment</a>
-  <a href="#admin">Admin</a>
 </nav>
 
 <section id="services">
-  <h2>Our Services</h2>
+  <h2>Our Services & Prices</h2>
   <ul>
-    <li>Internet Browsing</li>
-    <li>Printing & Scanning</li>
-    <li>Typing & CV Writing</li>
-    <li>Online Applications</li>
+    <li>Copy – <strong>R3</strong></li>
+    <li>Copy Colour – <strong>R5</strong></li>
+    <li>Print Out (Black & White) – <strong>R7</strong></li>
+    <li>Print Out (Colour) – <strong>R15</strong></li>
+    <li>Scan (Per Page) – <strong>R8</strong></li>
+    <li>CV + Print Out + PDF – <strong>R35</strong></li>
+    <li>Email Creation – <strong>R30</strong></li>
+    <li>Typing (Per Page) – <strong>R20</strong></li>
+    <li>Certificate Design – <strong>Negotiable</strong></li>
+    <li>Poster Design – <strong>Negotiable</strong></li>
+    <li>Invoices – <strong>Negotiable</strong></li>
+    <li>Booking Online (Home Affairs & More) – <strong>Negotiable</strong></li>
+    <li>College Application – <strong>Negotiable</strong></li>
   </ul>
 </section>
 
@@ -47,29 +55,34 @@ footer{background:#111;color:#fff;text-align:center;padding:20px}
   <form id="bookingForm">
     <input id="name" placeholder="Full Name" required>
     <input id="phone" placeholder="Phone Number" required>
+
     <select id="service" required>
       <option value="">Select Service</option>
-      <option>Internet</option>
-      <option>CV Writing</option>
-      <option>Printing</option>
-      <option>Online Application</option>
+      <option value="Copy">Copy</option>
+      <option value="Copy Colour">Copy Colour</option>
+      <option value="Print Black">Print Out Black</option>
+      <option value="Print Colour">Print Out Colour</option>
+      <option value="Scan">Scan</option>
+      <option value="CV Package">CV + Print + PDF</option>
+      <option value="Email Creation">Email Creation</option>
+      <option value="Typing">Typing</option>
+      <option value="Certificate Design">Certificate Design</option>
+      <option value="Poster Design">Poster Design</option>
+      <option value="Invoices">Invoices</option>
+      <option value="Home Affairs Booking">Home Affairs Booking</option>
+      <option value="College Application">College Application</option>
     </select>
+
     <input id="date" type="date" required>
     <button type="submit">Book via WhatsApp</button>
   </form>
+
+  <p style="margin-top:10px;color:#555;">💡 Payment is done at the shop after service.</p>
   <p id="msg"></p>
 </section>
 
-<section id="payment">
-  <h2>Payments</h2>
-  <p>Secure payments via PayFast</p>
-  <a href="https://www.payfast.co.za" target="_blank">
-    <button>Pay Now</button>
-  </a>
-</section>
-
-<!-- ADMIN -->
-<section id="admin">
+<!-- ADMIN (HIDDEN) -->
+<section id="admin" class="hidden">
   <h2>Admin Login</h2>
 
   <div id="loginBox">
@@ -87,7 +100,6 @@ footer{background:#111;color:#fff;text-align:center;padding:20px}
   <p>© 2026 Maluleka’s Internet Cafe</p>
 </footer>
 
-<!-- FIREBASE + LOGIC -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {
@@ -95,10 +107,12 @@ import {
   collection,
   addDoc,
   getDocs,
+  updateDoc,
+  doc,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-/* 🔥 REPLACE THESE WITH YOUR FIREBASE DETAILS */
+/* 🔥 ADD YOUR FIREBASE DETAILS */
 const firebaseConfig = {
   apiKey: "YOUR_API_KEY",
   authDomain: "YOUR_PROJECT.firebaseapp.com",
@@ -107,13 +121,34 @@ const firebaseConfig = {
   messagingSenderId: "XXXX",
   appId: "XXXX"
 };
-/* 🔥 END FIREBASE */
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+/* SHOW ADMIN ONLY IF #admin */
+if (window.location.hash === "#admin") {
+  document.getElementById("admin").classList.remove("hidden");
+}
+
+/* PRICES */
+const prices = {
+  "Copy": 3,
+  "Copy Colour": 5,
+  "Print Black": 7,
+  "Print Colour": 15,
+  "Scan": 8,
+  "CV Package": 35,
+  "Email Creation": 30,
+  "Typing": 20,
+  "Certificate Design": 0,
+  "Poster Design": 0,
+  "Invoices": 0,
+  "Home Affairs Booking": 0,
+  "College Application": 0
+};
+
 /* BOOKING */
-document.getElementById("bookingForm").addEventListener("submit", async e => {
+bookingForm.addEventListener("submit", async e => {
   e.preventDefault();
 
   const booking = {
@@ -121,24 +156,25 @@ document.getElementById("bookingForm").addEventListener("submit", async e => {
     phone: phone.value,
     service: service.value,
     date: date.value,
-    price: 50,
+    price: prices[service.value] || 0,
+    paid: false,
     created: serverTimestamp()
   };
 
   await addDoc(collection(db, "appointments"), booking);
+
+  const priceText = booking.price === 0 ? "Negotiable" : "R" + booking.price;
 
   const msgText =
 `Booking Request
 Name: ${booking.name}
 Phone: ${booking.phone}
 Service: ${booking.service}
-Date: ${booking.date}`;
+Date: ${booking.date}
+Price: ${priceText}`;
 
-  window.open(
-    "https://wa.me/27732176610?text=" + encodeURIComponent(msgText)
-  );
-
-  msg.textContent = "✅ Booking sent. SMS notification will arrive.";
+  window.open("https://wa.me/27732176610?text=" + encodeURIComponent(msgText));
+  msg.textContent = "✅ Booking sent via WhatsApp";
   e.target.reset();
 });
 
@@ -154,19 +190,29 @@ window.login = async () => {
 
   const snapshot = await getDocs(collection(db, "appointments"));
   report.innerHTML = "";
-
   let total = 0;
 
-  snapshot.forEach(doc => {
-    const d = doc.data();
-    total += d.price || 0;
+  snapshot.forEach(docc => {
+    const d = docc.data();
+    if (d.paid) total += d.price || 0;
+
     const li = document.createElement("li");
-    li.textContent = `${d.name} – ${d.service} – R${d.price}`;
+    li.innerHTML = `
+      ${d.name} – ${d.service} – R${d.price}
+      <strong>${d.paid ? " ✅ Paid" : " ❌ Not Paid"}</strong>
+      <button>Mark as ${d.paid ? "Not Paid" : "Paid"}</button>
+    `;
+
+    li.querySelector("button").onclick = async () => {
+      await updateDoc(doc(db, "appointments", docc.id), { paid: !d.paid });
+      login();
+    };
+
     report.appendChild(li);
   });
 
   const totalLi = document.createElement("li");
-  totalLi.innerHTML = `<strong>Total Sales: R${total}</strong>`;
+  totalLi.innerHTML = `<strong>Total Paid Sales: R${total}</strong>`;
   report.appendChild(totalLi);
 };
 </script>
