@@ -2,165 +2,172 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Maluleka's Internet Cafe</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maluleka’s Internet Cafe</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f4f6f8;
-  color: #333;
-}
-
-/* Loader */
-#loader {
-  position: fixed;
-  inset: 0;
-  background: #0b4f6c;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  z-index: 9999;
-}
-
-header {
-  background: #0b4f6c;
-  color: white;
-  padding: 40px 15px;
-  text-align: center;
-}
-
-nav {
-  background: white;
-  display: flex;
-  justify-content: center;
-  gap: 25px;
-  padding: 15px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  position: sticky;
-  top: 0;
-}
-
-nav a {
-  text-decoration: none;
-  color: #0b4f6c;
-  font-weight: bold;
-}
-
-section {
-  padding: 40px 15px;
-  max-width: 1100px;
-  margin: auto;
-}
-
-.services {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-}
-
-.card {
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-  text-align: center;
-}
-
-.card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-
-.card h3 {
-  margin: 15px 0 5px;
-  color: #0b4f6c;
-}
-
-.card p {
-  padding: 0 10px 20px;
-}
-
-/* WhatsApp button */
-.whatsapp {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-  background: #25d366;
-  color: white;
-  padding: 14px 20px;
-  border-radius: 50px;
-  text-decoration: none;
-  font-weight: bold;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-}
-
-footer {
-  background: #0b4f6c;
-  color: white;
-  text-align: center;
-  padding: 15px;
-}
+body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:#f1f3f6}
+header{background:linear-gradient(135deg,#000,#333);color:#fff;padding:50px;text-align:center}
+nav{background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.1);text-align:center}
+nav a{display:inline-block;padding:15px;text-decoration:none;font-weight:bold;color:#333}
+section{background:#fff;margin:20px;padding:20px;border-radius:10px;box-shadow:0 5px 20px rgba(0,0,0,.08)}
+button{background:#0a7cff;color:#fff;border:none;padding:12px 20px;border-radius:6px;font-size:16px}
+input,select{width:100%;padding:12px;margin:6px 0}
+footer{background:#111;color:#fff;text-align:center;padding:20px}
+.hidden{display:none}
 </style>
 </head>
 
 <body>
 
-<div id="loader">Maluleka's Internet Cafe</div>
-
 <header>
-  <h1>Maluleka's Internet Cafe</h1>
-  <p>Ditirelo tša Inthanete tša maemo a godimo</p>
+  <h1>Maluleka’s Internet Cafe</h1>
+  <p>Professional Digital Services</p>
 </header>
 
 <nav>
   <a href="#services">Services</a>
-  <a href="#contact">Contact</a>
+  <a href="#booking">Appointment</a>
+  <a href="#payment">Payment</a>
+  <a href="#admin">Admin</a>
 </nav>
 
 <section id="services">
   <h2>Our Services</h2>
+  <ul>
+    <li>Internet Browsing</li>
+    <li>Printing & Scanning</li>
+    <li>Typing & CV Writing</li>
+    <li>Online Applications</li>
+  </ul>
+</section>
 
-  <div class="services">
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1581092334651-ddf26d9a09d0" alt="Printing">
-      <h3>Copying & Printing</h3>
-      <p>Go gatiša le go kopiša ditokomane</p>
-    </div>
+<section id="booking">
+  <h2>Book Appointment</h2>
+  <form id="bookingForm">
+    <input id="name" placeholder="Full Name" required>
+    <input id="phone" placeholder="Phone Number" required>
+    <select id="service" required>
+      <option value="">Select Service</option>
+      <option>Internet</option>
+      <option>CV Writing</option>
+      <option>Printing</option>
+      <option>Online Application</option>
+    </select>
+    <input id="date" type="date" required>
+    <button type="submit">Book via WhatsApp</button>
+  </form>
+  <p id="msg"></p>
+</section>
 
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04" alt="Scanning">
-      <h3>Scanning</h3>
-      <p>Go skena ditokomane ka lebelo</p>
-    </div>
+<section id="payment">
+  <h2>Payments</h2>
+  <p>Secure payments via PayFast</p>
+  <a href="https://www.payfast.co.za" target="_blank">
+    <button>Pay Now</button>
+  </a>
+</section>
 
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f" alt="Internet">
-      <h3>Internet Access</h3>
-      <p>Inthanete ya lebelo le godimo</p>
-    </div>
+<!-- ADMIN -->
+<section id="admin">
+  <h2>Admin Login</h2>
+
+  <div id="loginBox">
+    <input type="password" id="adminPass" placeholder="Enter admin password">
+    <button onclick="login()">Login</button>
+  </div>
+
+  <div id="dashboard" class="hidden">
+    <h3>Daily Sales Report</h3>
+    <ul id="report"></ul>
   </div>
 </section>
 
-<section id="contact">
-  <h2>Contact Us</h2>
-  <p>📍 Maluleka's Internet Cafe</p>
-  <p>📞 WhatsApp: 07X XXX XXXX</p>
-</section>
-
-<a class="whatsapp" href="https://wa.me/27XXXXXXXXX">WhatsApp Us</a>
-
 <footer>
-  <p>© 2026 Maluleka's Internet Cafe</p>
+  <p>© 2026 Maluleka’s Internet Cafe</p>
 </footer>
 
-<script>
-window.onload = () => {
-  document.getElementById("loader").style.display = "none";
+<!-- FIREBASE + LOGIC -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+/* 🔥 REPLACE THESE WITH YOUR FIREBASE DETAILS */
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "XXXX",
+  appId: "XXXX"
+};
+/* 🔥 END FIREBASE */
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+/* BOOKING */
+document.getElementById("bookingForm").addEventListener("submit", async e => {
+  e.preventDefault();
+
+  const booking = {
+    name: name.value,
+    phone: phone.value,
+    service: service.value,
+    date: date.value,
+    price: 50,
+    created: serverTimestamp()
+  };
+
+  await addDoc(collection(db, "appointments"), booking);
+
+  const msgText =
+`Booking Request
+Name: ${booking.name}
+Phone: ${booking.phone}
+Service: ${booking.service}
+Date: ${booking.date}`;
+
+  window.open(
+    "https://wa.me/27732176610?text=" + encodeURIComponent(msgText)
+  );
+
+  msg.textContent = "✅ Booking sent. SMS notification will arrive.";
+  e.target.reset();
+});
+
+/* ADMIN LOGIN */
+window.login = async () => {
+  if (adminPass.value !== "maluleka123") {
+    alert("Wrong password");
+    return;
+  }
+
+  loginBox.classList.add("hidden");
+  dashboard.classList.remove("hidden");
+
+  const snapshot = await getDocs(collection(db, "appointments"));
+  report.innerHTML = "";
+
+  let total = 0;
+
+  snapshot.forEach(doc => {
+    const d = doc.data();
+    total += d.price || 0;
+    const li = document.createElement("li");
+    li.textContent = `${d.name} – ${d.service} – R${d.price}`;
+    report.appendChild(li);
+  });
+
+  const totalLi = document.createElement("li");
+  totalLi.innerHTML = `<strong>Total Sales: R${total}</strong>`;
+  report.appendChild(totalLi);
 };
 </script>
 
