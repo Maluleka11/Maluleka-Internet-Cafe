@@ -6,18 +6,95 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-body{margin:0;font-family:Arial,sans-serif;background:#f1f3f6}
-header{background:#000;color:#fff;padding:40px;text-align:center}
-nav{background:#fff;text-align:center;padding:10px}
-nav a{margin:10px;font-weight:bold;color:#000;text-decoration:none}
-section{background:#fff;margin:15px;padding:15px;border-radius:8px}
-button{background:#0a7cff;color:#fff;border:none;padding:12px;width:100%;border-radius:6px;font-size:16px;margin-top:8px}
-input,select{width:100%;padding:10px;margin:6px 0}
-footer{background:#111;color:#fff;text-align:center;padding:15px}
-.hidden{display:none}
-.priceBox{background:#e6f2ff;padding:10px;border-radius:6px;font-weight:bold;margin-top:5px}
+:root{
+  --primary:#0a7cff;
+  --dark:#111;
+  --light:#f1f3f6;
+}
 
-/* FLOATING WHATSAPP */
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:var(--light);
+  line-height:1.6;
+}
+
+header{
+  background:linear-gradient(135deg,#000,#222);
+  color:#fff;
+  padding:50px 20px;
+  text-align:center;
+}
+
+header h1{margin:0;font-size:28px}
+header p{opacity:.9}
+
+nav{
+  background:#fff;
+  padding:12px;
+  text-align:center;
+  position:sticky;
+  top:0;
+  z-index:100;
+  box-shadow:0 2px 6px rgba(0,0,0,.1);
+}
+
+nav a{
+  margin:10px;
+  font-weight:bold;
+  color:#000;
+  text-decoration:none;
+}
+
+section{
+  background:#fff;
+  margin:20px;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,.05);
+}
+
+h2{color:#222;margin-top:0}
+
+button{
+  background:var(--primary);
+  color:#fff;
+  border:none;
+  padding:14px;
+  width:100%;
+  border-radius:8px;
+  font-size:16px;
+  margin-top:10px;
+  cursor:pointer;
+}
+
+input,select{
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+  border-radius:6px;
+  border:1px solid #ccc;
+}
+
+.priceBox{
+  background:#e6f2ff;
+  padding:10px;
+  border-radius:6px;
+  font-weight:bold;
+}
+
+footer{
+  background:var(--dark);
+  color:#fff;
+  text-align:center;
+  padding:20px;
+  font-size:14px;
+}
+
+footer a{color:var(--primary);text-decoration:none}
+
+.hidden{display:none}
+
 #whatsappFloat{
   position:fixed;
   bottom:20px;
@@ -33,10 +110,7 @@ footer{background:#111;color:#fff;text-align:center;padding:15px}
   justify-content:center;
   text-decoration:none;
   box-shadow:0 4px 10px rgba(0,0,0,.3);
-  z-index:999;
 }
-
-.adminBox{background:#f9f9f9;padding:10px;border-radius:6px;margin:6px 0}
 </style>
 </head>
 
@@ -50,7 +124,8 @@ footer{background:#111;color:#fff;text-align:center;padding:15px}
 <nav>
   <a href="#services">Services</a>
   <a href="#booking">Book</a>
-  <a href="#admin">Admin</a>
+  <a href="#privacy">Privacy</a>
+  <a href="#terms">Terms</a>
 </nav>
 
 <section id="services">
@@ -71,156 +146,88 @@ footer{background:#111;color:#fff;text-align:center;padding:15px}
 <section id="booking">
   <h2>Book via WhatsApp</h2>
 
-  <form id="bookingForm">
-    <input id="name" placeholder="Full Name" required>
-    <input id="phone" placeholder="Phone Number" required>
+  <input id="name" placeholder="Full Name" required>
+  <input id="phone" placeholder="Phone Number" required>
 
-    <select id="service" required>
-      <option value="">Select Service</option>
-      <option value="Copy">Copy</option>
-      <option value="Copy Colour">Copy Colour</option>
-      <option value="Print Black">Print Black</option>
-      <option value="Print Colour">Print Colour</option>
-      <option value="Scan">Scan</option>
-      <option value="CV Package">CV + Print + PDF</option>
-      <option value="Email Creation">Email Creation</option>
-      <option value="Typing">Typing</option>
-      <option value="Other">Other (Negotiable)</option>
-    </select>
+  <select id="service">
+    <option value="">Select Service</option>
+    <option value="Copy">Copy</option>
+    <option value="Copy Colour">Copy Colour</option>
+    <option value="Print Black">Print Black</option>
+    <option value="Print Colour">Print Colour</option>
+    <option value="Scan">Scan</option>
+    <option value="CV Package">CV + Print + PDF</option>
+    <option value="Email Creation">Email Creation</option>
+    <option value="Typing">Typing</option>
+    <option value="Other">Other</option>
+  </select>
 
-    <div class="priceBox">Price: <span id="price">R0</span></div>
+  <div class="priceBox">Price: <span id="price">R0</span></div>
 
-    <input type="date" id="date" required>
-    <input type="time" id="time" required>
+  <input type="date" id="date">
+  <input type="time" id="time">
 
-    <button type="submit">📲 Book on WhatsApp</button>
-  </form>
+  <button onclick="book()">📲 Book on WhatsApp</button>
 </section>
 
-<section id="admin">
-  <h2>Admin Dashboard</h2>
+<section id="privacy">
+  <h2>Privacy Policy</h2>
+  <p>We respect your privacy. Information such as your name and phone number is only used to provide our services.</p>
+  <p>Google AdSense may use cookies to show relevant ads.</p>
+  <p><strong>Contact:</strong><br>
+  📧 malulekainternetcafe@gmail.com<br>
+  📞 073 217 6610</p>
+</section>
 
-  <div id="loginBox">
-    <input type="password" id="adminPass" placeholder="Enter Admin Password">
-    <button onclick="login()">Login</button>
-  </div>
-
-  <div id="dashboard" class="hidden">
-    <h3>Bookings</h3>
-    <div id="report"></div>
-    <h3>Total Income: <span id="total">R0</span></h3>
-    <button onclick="clearData()">Clear All Bookings</button>
-  </div>
+<section id="terms">
+  <h2>Terms & Conditions</h2>
+  <ul>
+    <li>Services are provided on a first-come or booked basis.</li>
+    <li>Prices may change without prior notice.</li>
+    <li>Customers are responsible for checking documents before printing.</li>
+    <li>We are not responsible for incorrect information provided by clients.</li>
+    <li>Use of this website means you agree to these terms.</li>
+  </ul>
 </section>
 
 <footer>
-  <p>© 2026 Maluleka’s Internet Cafe</p>
+  <p>© 2026 Maluleka’s Internet Cafe |
+    <a href="#privacy">Privacy Policy</a> |
+    <a href="#terms">Terms & Conditions</a>
+  </p>
 </footer>
 
 <a id="whatsappFloat" href="https://wa.me/27732176610" target="_blank">💬</a>
 
 <script>
-const bookingForm = document.getElementById("bookingForm");
-const service = document.getElementById("service");
-const price = document.getElementById("price");
-const nameInput = document.getElementById("name");
-const phone = document.getElementById("phone");
-const date = document.getElementById("date");
-const time = document.getElementById("time");
-const adminPass = document.getElementById("adminPass");
-const loginBox = document.getElementById("loginBox");
-const dashboard = document.getElementById("dashboard");
-const report = document.getElementById("report");
-const total = document.getElementById("total");
-
-const prices = {
-  "Copy": 3,
-  "Copy Colour": 5,
-  "Print Black": 7,
-  "Print Colour": 15,
-  "Scan": 8,
-  "CV Package": 35,
-  "Email Creation": 30,
-  "Typing": 20,
-  "Other": 0
+const prices={
+  "Copy":3,"Copy Colour":5,"Print Black":7,"Print Colour":15,
+  "Scan":8,"CV Package":35,"Email Creation":30,"Typing":20,"Other":0
 };
 
-service.addEventListener("change", () => {
-  const p = prices[service.value] || 0;
-  price.innerText = p === 0 ? "Negotiable" : "R" + p;
-});
+function book(){
+  const name=document.getElementById("name").value;
+  const phone=document.getElementById("phone").value;
+  const service=document.getElementById("service").value;
+  const date=document.getElementById("date").value;
+  const time=document.getElementById("time").value;
+  const price=prices[service]||"Negotiable";
 
-bookingForm.addEventListener("submit", function(e){
-  e.preventDefault();
+  const msg=`Booking Request
+Name: ${name}
+Phone: ${phone}
+Service: ${service}
+Date: ${date}
+Time: ${time}
+Price: ${price}`;
 
-  const p = prices[service.value] || 0;
-
-  const booking = {
-    name: nameInput.value,
-    phone: phone.value,
-    service: service.value,
-    date: date.value,
-    time: time.value,
-    price: p
-  };
-
-  const data = JSON.parse(localStorage.getItem("bookings") || "[]");
-  data.push(booking);
-  localStorage.setItem("bookings", JSON.stringify(data));
-
-  const text =
-`Booking Request
-Name: ${booking.name}
-Phone: ${booking.phone}
-Service: ${booking.service}
-Date: ${booking.date}
-Time: ${booking.time}
-Price: ${p === 0 ? "Negotiable" : "R"+p}`;
-
-  window.open(
-    "https://wa.me/27732176610?text=" + encodeURIComponent(text),
-    "_blank"
-  );
-
-  bookingForm.reset();
-  price.innerText = "R0";
-});
-
-function login(){
-  if(adminPass.value !== "maluleka123"){
-    alert("Wrong password");
-    return;
-  }
-  loginBox.classList.add("hidden");
-  dashboard.classList.remove("hidden");
-  loadBookings();
+  window.open("https://wa.me/27732176610?text="+encodeURIComponent(msg));
 }
 
-function loadBookings(){
-  const data = JSON.parse(localStorage.getItem("bookings") || "[]");
-  report.innerHTML = "";
-  let totalAmount = 0;
-
-  data.forEach(b => {
-    totalAmount += b.price;
-    report.innerHTML += `
-      <div class="adminBox">
-        <strong>${b.name}</strong><br>
-        ${b.service} – R${b.price}<br>
-        ${b.date} @ ${b.time}
-      </div>
-    `;
-  });
-
-  total.innerText = "R" + totalAmount;
-}
-
-function clearData(){
-  if(confirm("Delete all bookings?")){
-    localStorage.removeItem("bookings");
-    loadBookings();
-  }
-}
+document.getElementById("service").onchange=e=>{
+  const p=prices[e.target.value];
+  document.getElementById("price").innerText=p?("R"+p):"Negotiable";
+};
 </script>
 
 </body>
