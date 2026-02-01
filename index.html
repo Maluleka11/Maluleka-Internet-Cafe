@@ -97,7 +97,6 @@ footer{background:#111;color:#fff;text-align:center;padding:15px}
   </form>
 </section>
 
-<!-- ADMIN -->
 <section id="admin">
   <h2>Admin Dashboard</h2>
 
@@ -178,9 +177,10 @@ Date: ${booking.date}
 Time: ${booking.time}
 Price: ${p === 0 ? "Negotiable" : "R"+p}`;
 
-  const whatsappURL = "https://wa.me/27732176610?text=" + encodeURIComponent(text);
-
-  window.open(whatsappURL, "_blank");
+  window.open(
+    "https://wa.me/27732176610?text=" + encodeURIComponent(text),
+    "_blank"
+  );
 
   bookingForm.reset();
   price.innerText = "R0";
@@ -191,7 +191,6 @@ function login(){
     alert("Wrong password");
     return;
   }
-
   loginBox.classList.add("hidden");
   dashboard.classList.remove("hidden");
   loadBookings();
